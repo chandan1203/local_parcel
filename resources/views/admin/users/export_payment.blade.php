@@ -1,0 +1,51 @@
+@extends('admin.layout')
+
+@section('main')
+<section class="panel-body">
+    <h1 class="page-title text-center">Download Payment List</h1>
+   <!--  <small class="alert alert-warning">Max 10,000 data will be downloaded at a time.</small> -->
+</section>
+<center>{!! errors($errors) !!}</center>
+
+
+<section class="panel-body">
+    {!! Form::open([ 'url'=> action('Users@postPaymentExport'), 'method'=> 'post', 'autocomplete'=>'off' ]) !!}
+
+     <div class="form-group col-sm-2">
+        {!! Form::label('shipping', 'Shipping Status: ') !!}
+        {!! Form::select('shipping', [ 1 => 'Pending', '8'=>'Arrived at New York office', '9'=>'Arrived at Chicago office ',2 => 'Processing', 3 => 'Shipped', 4 => 'Arrived', 5 => 'Delivered', 6=> 'Cancelled'], old('shipping'), ['class'=>'form-control', 'placeholder'=> '-Select-']) !!}
+    </div> 
+
+    <div class="form-group col-sm-2">
+        {!! Form::label('status', 'Status: ') !!}
+        {!! Form::select('status', [ 2 => 'Paid and verified', 1 => 'Unpaid', 3 => 'Cancelled'], old('status'), ['class'=>'form-control', 'placeholder'=> '-Select-']) !!}
+    </div> 
+
+    
+    <div class="form-group col-sm-2">
+        {!! Form::label('joined_after', 'From date') !!}
+        {!! Form::text('joined_after', old('joined_after') , ['class'=> 'form-control datepicker'] ) !!}
+    </div>
+    
+    <div class="form-group col-sm-2">
+        {!! Form::label('joined_before', 'End date') !!}
+        {!! Form::text('joined_before', old('joined_before') , ['class'=> 'form-control datepicker'] ) !!}
+    </div>
+
+
+    
+    <!-- <div class="form-group col-sm-3">
+        {!! Form::label('format', 'Format') !!}<br />
+        <input type="radio" name="format" value="xlsx"/> Excel (xlsx)
+        <input type="radio" name="format" value="xls"/> Excel (xls)
+        <input type="radio" name="format" value="csv" checked /> CSV
+    </div> -->
+    <div class="form-group col-sm-4">
+    {!! Form::label('', '') !!}<br />
+    {!! Form::submit('Download', ['class'=> 'btn btn-info btn-block']) !!}
+    </div>
+    
+    {!! Form::close() !!}
+</section>
+
+@stop
