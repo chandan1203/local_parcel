@@ -128,8 +128,7 @@ Route::group(['prefix' => 'admin', 'middleware'=> ['auth', 'permissions']], func
 Route::group(['middleware'=> ['auth', 'permissions']], function () {
 
 Route::get('/warehouse-dashboard', 'WarehouseController@index')->name('warehouse');
-Route::get('/warehouse/inbound', 'WarehouseController@inbound')->name('warehouse.inbound');
-Route::get('/warehouse/outbound', 'WarehouseController@outbound')->name('warehouse.outbound');
+Route::get('warehouse/scanner', 'WarehouseController@scanner')->name('warehouse.scanner');
 
 
 });

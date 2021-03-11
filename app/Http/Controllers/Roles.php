@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Role;
 use Carbon\Carbon;
-
-
 use App\Http\Requests;
+
+
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Http\Requests\CreateRole;
 use App\Http\Controllers\Controller;
 
 
 class Roles extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +24,7 @@ class Roles extends Controller
     public function index()
     {
         return view('admin.roles.index', ['roles' => Role::all()]);
-        
+
     }
 
     /**
@@ -33,9 +34,9 @@ class Roles extends Controller
      */
     public function create()
     {
-        
+
         return view('admin.roles.create');
-    
+
     }
 
     /**
@@ -44,13 +45,22 @@ class Roles extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(CreateRole $request)
+    public function store(Request $request)
     {
-        
-        Role::create($request->all());
-        
+
+        $roles = new Role;
+
+        $roles->name = $request->name;
+        $roles->slug = Str::slug($request->slug);
+        $roles->active = $request->active;
+
+
+        $roles->save();
+
+
+
         return redirect(action('Roles@index'));
-    
+
     }
 
     /**
@@ -61,9 +71,9 @@ class Roles extends Controller
      */
     public function show($id)
     {
-        
+
         return view('admin.roles.show', ['role'=>Role::find($id)]);
-        
+
     }
 
     /**
@@ -75,7 +85,7 @@ class Roles extends Controller
     public function edit($id)
     {
         return view('admin.roles.edit', ['role'=>Role::find($id)]);
-        
+
     }
 
     /**
@@ -90,9 +100,9 @@ class Roles extends Controller
         dd('chandan');
         if(Role::find($id)->update($request->all()))
         {
-        
+
             return back()->withErrors('success');
-        
+
         }
     }
 
@@ -104,70 +114,70 @@ class Roles extends Controller
      */
     public function destroy($id)
     {
-        
+
         if($id == 1){
             return redirect()->back();
         }else{
         if(Role::find($id)->delete())
         {
             return redirect()->back()->withErrors('Success');
-            
+
         } else{
-            
+
             return redirect()->back()->withErrors('Faild to delete the role');
-            
-         } 
+
+         }
         }
     }
-    
-    
+
+
     public function navs($id)
     {
         $all_navs = \App\Nav::all();
-        
+
         $permitted_navs = Role::find($id)->navs()->pluck('nav_id')->all();
         return view('admin.roles.navs',[ 'role'=> $id, 'navs'=> $all_navs, 'permitted_navs'=> $permitted_navs ]);
-            
+
     }
-    
-    
-    
+
+
+
     public function postNavs(Request $request)
     {
 
         Role::find($request->role_id)->navs()->detach();
-        
+
         Role::find($request->role_id)->navs()->attach($request->permissions);
 
         return back()->withErrors('Request processed successfully');
-        
+
     }
-    
-    
+
+
     public function permissions($id)
     {
         if( $id == 1){
             return redirect()->back();
         }else{
         $all_actions = \App\Permission::all();
-        
+
         $permitted_actions = Role::find($id)->permissions()->pluck('permission_id')->all();
         // dd($permitted_actions);
         return view('admin.roles.permissions',[ 'role'=> $id, 'actions'=> $all_actions, 'permitted_actions'=> $permitted_actions ]);
-        }       
+        }
     }
-    
-    
-    
+
+
+
     public function postPermissions(Request $request)
     {
         Role::find($request->role_id)->permissions()->detach();
-        
+
         Role::find($request->role_id)->permissions()->attach($request->permissions);
 
         return back()->withErrors('Request processed successfully');
-        
+
     }
-    
-    
+
+
 }

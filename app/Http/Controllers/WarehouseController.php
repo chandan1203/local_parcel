@@ -24,13 +24,9 @@ class WarehouseController extends Controller
         return view('admin.dashboards.dev');
     }
 
-    public function inbound()
+    public function scanner()
     {
-        return view('warehouse.inbound');
-    }
-    public function outbound()
-    {
-        return view('warehouse.outbound');
+        return view('warehouse.scanner');
     }
 
     public function all()
