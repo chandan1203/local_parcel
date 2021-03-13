@@ -129,6 +129,12 @@ Route::group(['middleware'=> ['auth', 'permissions']], function () {
 
 Route::get('/warehouse-dashboard', 'WarehouseController@index')->name('warehouse');
 Route::get('warehouse/scanner', 'WarehouseController@scanner')->name('warehouse.scanner');
+Route::get('warehouse/lot-print', 'WarehouseController@lotPrint')->name('lot.print');
+Route::get('warehouse/lot-reporting', 'WarehouseController@lotReporting')->name('lot.reporting');
+
+Route::resource('lot','LotController');
+Route::get('lot/search','LotController@search');
+Route::get('lot/delete/{id}','LotController@destroy');
 
 
 });

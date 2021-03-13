@@ -78,6 +78,12 @@
         <div id="page-content-wrapper" class="col-sm-10 page-wrapper">
 
             <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
+                <h3>Warehouse Name:
+                    @if (auth()->user()->role_id == 3)
+                        {{ auth()->user()->warehouse->name }}
+                    @endif
+
+                </h3>
             </nav>
 
 

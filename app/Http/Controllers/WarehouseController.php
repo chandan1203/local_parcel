@@ -75,4 +75,13 @@ class WarehouseController extends Controller
     {
         return $this->warehouse->delete($id);
     }
+
+    public function lotPrint()
+    {
+        return view('warehouse.lot-print');
+    }
+    public function lotReporting()
+    {
+        return view('warehouse.lot-reporting');
+    }
 }

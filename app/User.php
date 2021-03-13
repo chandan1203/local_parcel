@@ -282,4 +282,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('\App\UserAddress', 'id', 'user_id');
     }
+
+    public function warehouse()
+    {
+        return $this->hasOne('App\Warehouse','user_id','id');
+    }
 }

@@ -34,7 +34,7 @@
                 </ul>
 
                 @else
-                        <a href="{{ url('warehouse/scanner') }}" class="list-group-item list-group-item-action" aria-expanded="false"><span class="{{$nav->icon}}"></span> <span class="item-logo">{{$nav->name}}</span></a>
+                        <a href="{{$nav->route}}" class="list-group-item list-group-item-action" aria-expanded="false"><span class="{{$nav->icon}}"></span> <span class="item-logo">{{$nav->name}}</span></a>
                 @endif
             @endforeach
         @endif

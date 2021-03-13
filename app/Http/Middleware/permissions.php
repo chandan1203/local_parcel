@@ -36,7 +36,7 @@ class Permissions
 
         if (Auth::user()->role == 2) {
             return Redirect::to('http://localhost:8000/');
-        } elseif (Auth::user()->role == 3 || Auth::user()->role == 4 || Auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 4 || Auth::user()->role == 5) {
 
             $permission = DB::table('permission_role')->where('role_id', Auth::user()->role)->get();
 
@@ -61,7 +61,7 @@ class Permissions
                     $this->is_controlled_access = true;
                 }
             }
-        } elseif (Auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1 || Auth::user()->role == 3) {
             $this->is_controlled_access = true;
         }
 

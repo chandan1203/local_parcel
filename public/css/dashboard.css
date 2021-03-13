@@ -1,7 +1,7 @@
 /*  newly added from warehouse  */
 .custom-input{
   width: 100%;
-  font-size: 20px;
+  font-size: 30px;
   border: 2px solid #aaa;
   border-radius: 4px;
   margin: 50px 0;
@@ -23,7 +23,7 @@ border: none;
 background-color: #33414E;
 color: white;
 padding: 10px 25px;
-font-size: 16px;
+font-size: 25px;
 cursor: pointer;
 text-align: center;
 }
